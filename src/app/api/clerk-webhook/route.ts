@@ -49,6 +49,13 @@ export async function POST(req: NextRequest) {
       const email = email_addresses[0].email_address;
       const name = `${first_name || ""} ${last_name || ""}`.trim();
 
+      const existingUser = await UserModel.findOne({clerkId: id});
+
+      if (existingUser) {
+        console.error("User already exists");
+        return new NextResponse("User already exists", {status: 400});
+      }
+      
       const newUser = new UserModel({
         email,
         name,
