@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
-import dbConnect from "@/lib/dbConnect";
+
 
 export const runtime = "edge";
 
@@ -68,11 +68,11 @@ Example output schema (actual values must follow this structure):  
         status: 200,
       }
     );
-  } catch (error: any) {
+  } catch (error) {
     return NextResponse.json(
       {
         error: "Could not suggest exercises",
-        details: String(error?.message || error),
+        details: String(error),
       },
       {
         status: 500,

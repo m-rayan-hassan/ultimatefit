@@ -7,7 +7,7 @@ import Exercises from "./Exercises";
 
 interface Step {
   name: string;
-  Component: React.ComponentType<any>;
+  Component: React.FC;
 }
 
 const Stepper = () => {
