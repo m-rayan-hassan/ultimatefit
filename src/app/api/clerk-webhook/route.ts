@@ -33,8 +33,7 @@ export async function POST(req: NextRequest) {
       "svix-timestamp": svix_timestamp,
       "svix-signature": svix_signature,
     }) as WebhookEvent;
-    console.log(evt);
-    
+  
   } catch (error) {
     console.error("Error verifying webhook", error);
     return new NextResponse("Error occured", {status: 400});
@@ -57,6 +56,7 @@ export async function POST(req: NextRequest) {
         await newUser.save();
 
         console.log("User created successfully");
+        return new NextResponse("User created!", {status: 200});
         
     } catch (error) {
         console.log("Error creating user: ", error);
