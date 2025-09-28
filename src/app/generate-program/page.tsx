@@ -7,11 +7,23 @@ import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
+interface Message {
+  content: string;
+  role: string;
+}
+
+interface VapiMessage {
+  type: string;
+  transcriptType?: string;
+  transcript?: string;
+  role?: string;
+}
+
 const GenerateProgramPage = () => {
   const [callActive, setCallActive] = useState(false);
   const [connecting, setConnecting] = useState(false);
   const [isSpeaking, setIsSpeaking] = useState(false);
-  const [messages, setMessages] = useState<any[]>([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [callEnded, setCallEnded] = useState(false);
 
   const { user } = useUser();
@@ -87,14 +99,18 @@ const GenerateProgramPage = () => {
       console.log("AI stopped Speaking");
       setIsSpeaking(false);
     };
-    const handleMessage = (message: any) => {
+
+    const handleMessage = (message: VapiMessage) => {
       if (message.type === "transcript" && message.transcriptType === "final") {
-        const newMessage = { content: message.transcript, role: message.role };
+        const newMessage = { 
+          content: message.transcript || "", 
+          role: message.role || "unknown" 
+        };
         setMessages((prev) => [...prev, newMessage]);
       }
     };
 
-    const handleError = (error: any) => {
+    const handleError = (error: unknown) => {
       console.log("Vapi Error", error);
       setConnecting(false);
       setCallActive(false);
@@ -240,10 +256,12 @@ const GenerateProgramPage = () => {
               {/* User Image */}
               <div className="relative size-32 mb-4">
                 <img
-                  src={user?.imageUrl}
-                  alt="User"
-                  // ADD THIS "size-full" class to make it rounded on all images
+                  src={user?.imageUrl || "/default-avatar.png"}
+                  alt="User profile"
                   className="size-full object-cover rounded-full"
+                  onError={(e) => {
+                    e.currentTarget.src = "/default-avatar.png";
+                  }}
                 />
               </div>
 
