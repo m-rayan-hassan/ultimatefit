@@ -161,7 +161,8 @@ export async function POST(request: NextRequest) {
     userId: user_id,
     name: full_name,
     workoutPlan,
-    dietPlan
+    dietPlan,
+    isActive: true
   })
   await newPlan.save();
 }
