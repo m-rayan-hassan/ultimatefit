@@ -11,6 +11,7 @@ export interface IPlan extends Document {
                 name: string;
                 sets?: number;
                 reps?: number;
+                youtube_link: string,
                 duration?: string;
                 description?: string;
                 exercises?: string[];
@@ -58,8 +59,11 @@ const PlansSchema = new Schema<IPlan>(
                             sets: {
                                 type: Number
                             },
-                            reqps: {
+                            reps: {
                                 type: Number
+                            },
+                            youtube_link: {
+                                type: String
                             },
                             duration: {
                                 type: String

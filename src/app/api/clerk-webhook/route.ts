@@ -64,6 +64,8 @@ export async function POST(req: NextRequest) {
       });
       await newUser.save();
 
+      
+
       console.log("User created successfully");
       return new NextResponse("User created!", { status: 200 });
     } catch (error) {
