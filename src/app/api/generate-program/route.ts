@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     fitness_level,
     food_preferences,
     user_id,
-    full_name
+    full_name,
   } = reqBody;
 
   const workoutPrompt = `You are an experienced fitness coach creating a personalized workout plan based on:
@@ -119,38 +119,42 @@ export async function POST(request: NextRequest) {
   });
 
   let dietPlanResult = JSON.parse(workoutPlan.text);
-  dietPlanResult = validateWorkoutPlan(dietPlanResult);
+  dietPlanResult = validateDietPlan(dietPlanResult);
 
-  interface workoutPlanInterface extends Document {
+  // Routine inside each day's exercise
+  interface Routine {
+    name: string;
+    sets: number | string; // AI might send as string
+    reps: number | string; // AI might send as string
+    youtube_link: string;
+  }
+
+  // Exercise for a specific day
+  interface Exercise {
+    day: string;
+    routines: Routine[];
+  }
+
+  // Whole workout plan
+  interface WorkoutPlan {
     schedule: string[];
-        exercises: {
-            day: string;
-            routines: {
-                name: string;
-                sets?: number;
-                reps?: number;
-                youtube_link: string,
-                duration?: string;
-                description?: string;
-                exercises?: string[];
-            }[];
-        }[];
+    exercises: Exercise[];
   }
 
   interface dietPlanInterface extends Document {
     dailyCalories: number;
-        meals: {
-            name: string;
-            foods: string[];
-        }[];
+    meals: {
+      name: string;
+      foods: string[];
+    }[];
   }
 
-  function validateWorkoutPlan(plan: workoutPlanInterface) {
-    const validatedPlan = {
+  function validateWorkoutPlan(plan: WorkoutPlan): WorkoutPlan {
+    const validatedPlan: WorkoutPlan = {
       schedule: plan.schedule,
-      exercises: plan.exercises.map((exercise: any) => ({
+      exercises: plan.exercises.map((exercise: Exercise) => ({
         day: exercise.day,
-        routines: exercise.routines.map((routine: any) => ({
+        routines: exercise.routines.map((routine: Routine) => ({
           name: routine.name,
           sets:
             typeof routine.sets === "number"
@@ -160,7 +164,7 @@ export async function POST(request: NextRequest) {
             typeof routine.reps === "number"
               ? routine.reps
               : parseInt(routine.reps) || 10,
-          youtube_link: routine.youtube_link
+          youtube_link: routine.youtube_link,
         })),
       })),
     };
@@ -172,7 +176,7 @@ export async function POST(request: NextRequest) {
     // only keep the fields we want
     const validatedPlan = {
       dailyCalories: plan.dailyCalories,
-      meals: plan.meals.map((meal: any) => ({
+      meals: plan.meals.map((meal) => ({
         name: meal.name,
         foods: meal.foods,
       })),
@@ -185,7 +189,7 @@ export async function POST(request: NextRequest) {
     name: full_name,
     workoutPlan,
     dietPlan,
-    isActive: true
-  })
+    isActive: true,
+  });
   await newPlan.save();
 }
