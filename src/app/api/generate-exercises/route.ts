@@ -54,7 +54,7 @@ Example output schema (actual values must follow this structure):  
 `;
 
     const result = await generateText({
-      model: google("gemini-2.5-flash"),
+      model: openai("gpt-4"),
       prompt,
     });
 
