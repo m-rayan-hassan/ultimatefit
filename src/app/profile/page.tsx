@@ -15,10 +15,49 @@ import axios from "axios";
 import { AppleIcon, CalendarIcon, DumbbellIcon } from "lucide-react";
 import React, { useEffect, useState } from "react";
 
+
+  interface Meals {
+    name: string;
+    foods: string[];
+  }
+  interface Exercises {
+    day: string;
+    routines: {
+      name: string;
+      sets?: number;
+      reps?: number;
+      youtube_link: string;
+      duration?: string;
+      description?: string;
+      steps: string[];
+      muscles_targeted: string[];
+      difficulty: string;
+      exercises?: string[];
+    }[];
+  }
+  interface WorkoutPlan {
+  schedule: string[];
+  exercises: Exercises[];
+}
+
+  interface DietPlan {
+  dailyCalories: number;
+  meals: Meals[];
+}
+  interface Plan {
+  _id: string;
+  userId: string;
+  name: string;
+  workoutPlan: WorkoutPlan;
+  dietPlan: DietPlan;
+  isActive: boolean;
+}
+
+
 const ProfilePage = () => {
   const { user } = useUser();
 
-  const [allPlans, setAllPlans] = useState<any[]>([]);
+  const [allPlans, setAllPlans] = useState<Plan[]>([]);
   const [selectedPlanId, setSelectedPlanId] = useState<null | string>(null);
 
   useEffect(() => {
@@ -44,26 +83,6 @@ const ProfilePage = () => {
   const currentPlan = selectedPlanId
     ? allPlans.find((plan) => plan._id === selectedPlanId)
     : activePlan;
-
-  interface Meals {
-    name: string;
-    foods: string[];
-  }
-  interface Exercises {
-    day: string;
-    routines: {
-      name: string;
-      sets?: number;
-      reps?: number;
-      youtube_link: string;
-      duration?: string;
-      description?: string;
-      steps: string[];
-      muscles_targeted: string[];
-      difficulty: string;
-      exercises?: string[];
-    }[];
-  }
 
   return (
     <section className="relative z-10 pt-12 pb-32 flex-grow container mx-auto px-4">
