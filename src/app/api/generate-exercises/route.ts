@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
+import { openai } from "@ai-sdk/openai";
 import { google } from "@ai-sdk/google";
 import { generateText } from "ai";
 
-
 export const runtime = "edge";
-
 
 export async function POST(request: NextRequest) {
   try {
@@ -24,7 +23,7 @@ Important rules:
      - "steps": array of short step strings (3–6 steps, concise, actionable)  
      - "notes": optional short string (modifications, safety tips, tempo cues)  
      - "difficulty": one of "beginner" | "intermediate" | "advanced"  
-     - "youtube": a **short video** tutorial of that exercise only for eg. if the exercise is "hanging leg raises" you will only give video of "hanging leg raises" instead of videos like "complete abs workout",. Note: only give valid youtbue tutorials that exist and you will ensure that you only give the tutorial of that exercise for example if the exercise is "dumbbell chest press" you wilil only give tutorial of "dumbbell chest press" only and not "dumbbell fly or barbell press". And you will give the embed link like "https://www.youtube.com/embed/BCufdom7xgY?si=orc_oLtX70Y7xxIh"  instead of original one.
+     - "youtube": a **short video** tutorial of that exercise only for eg. if the exercise is "hanging leg raises" you will only give video of "hanging leg raises" instead of videos like "complete abs workout",. Note: only give valid youtbue tutorials that exist and you will ensure that you only give the tutorial of that exercise for example if the exercise is "dumbbell chest press" you wilil only give tutorial of "dumbbell chest press" only and not "dumbbell fly or barbell press". And you will give the embed link like "https://www.youtube.com/embed/4Y2ZdHCOXok?si=621TxB8eXZ-DoJaX"  instead of original one.
 3. Use the user's equipment first. If a muscle cannot be trained well with the provided equipment, give **one safe substitution** (e.g., "use dumbbell + bench for single-arm rows") and explain in one sentence why it’s appropriate.  
 4. Max 3 exercises per muscle. Do not list more.  
 5. Keep each "steps" item short (one sentence each). Avoid long essays.  
@@ -47,7 +46,7 @@ Example output schema (actual values must follow this structure):  
         "steps": ["Lie on bench holding dumbbells at chest","Press dumbbells up until arms extended","Lower under control to chest level"],
         "notes": "Use spotter if heavy; use neutral wrist if shoulder pain",
         "difficulty": "intermediate",
-        "youtube": "https://youtube.com"
+        "youtube": "https://www.youtube.com/embed/4Y2ZdHCOXok?si=621TxB8eXZ-DoJaX"
       }
     ]
   }

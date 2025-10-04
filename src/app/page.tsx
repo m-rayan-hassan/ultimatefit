@@ -1,6 +1,4 @@
 "use client";
-import EquipmentSelector from "@/components/EquipmentSelector";
-import MuscleSelector from "@/components/MuscleSelector";
 import Stepper from "@/components/Stepper";
 import TerminalOverlay from "@/components/TerminalOverlay";
 import { Button } from "@/components/ui/button";
