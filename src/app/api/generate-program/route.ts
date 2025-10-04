@@ -1,7 +1,7 @@
 import { google } from "@ai-sdk/google";
 import { NextRequest } from "next/server";
 import { generateText } from "ai";
-import PlanModel from "@/models/Plan";
+import PlanModel, { IPlan } from "@/models/Plan";
 
 export async function POST(request: NextRequest) {
   const reqBody = await request.json();
@@ -121,8 +121,31 @@ export async function POST(request: NextRequest) {
   let dietPlanResult = JSON.parse(workoutPlan.text);
   dietPlanResult = validateWorkoutPlan(dietPlanResult);
 
-  // validate and fix workout plan to ensure it has proper numeric types
-  function validateWorkoutPlan(plan: any) {
+  interface workoutPlanInterface extends Document {
+    schedule: string[];
+        exercises: {
+            day: string;
+            routines: {
+                name: string;
+                sets?: number;
+                reps?: number;
+                youtube_link: string,
+                duration?: string;
+                description?: string;
+                exercises?: string[];
+            }[];
+        }[];
+  }
+
+  interface dietPlanInterface extends Document {
+    dailyCalories: number;
+        meals: {
+            name: string;
+            foods: string[];
+        }[];
+  }
+
+  function validateWorkoutPlan(plan: workoutPlanInterface) {
     const validatedPlan = {
       schedule: plan.schedule,
       exercises: plan.exercises.map((exercise: any) => ({
@@ -145,7 +168,7 @@ export async function POST(request: NextRequest) {
   }
 
   // validate diet plan to ensure it strictly follows schema
-  function validateDietPlan(plan: any) {
+  function validateDietPlan(plan: dietPlanInterface) {
     // only keep the fields we want
     const validatedPlan = {
       dailyCalories: plan.dailyCalories,
