@@ -17,7 +17,8 @@ const Navbar = () => {
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-2">
             <div className="p-1 bg-primary/10 rounded">
-              <DumbbellIcon className="w-4 h-4 text-primary" />
+            <img src="/logo.png" alt="UltimateFit" className="w-8 h-8"/>
+              
             </div>
             <span className="text-xl font-bold font-mono">
               ultimate<span className="text-primary">fit</span>.ai

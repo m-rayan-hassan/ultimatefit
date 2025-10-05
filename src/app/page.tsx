@@ -2,15 +2,13 @@
 import Stepper from "@/components/Stepper";
 import TerminalOverlay from "@/components/TerminalOverlay";
 import { Button } from "@/components/ui/button";
+import UserPrograms from "@/components/UserPrograms";
 import { ArrowRightIcon } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+
 
 
 const HomePage = () => {
-  const [isWorkoutButtonSelected, setIsWorkoutButtonSelected] =
-    useState<boolean>(true);
-  const [isDietButtonSelected, setIsDietButtonSelected] = useState<boolean>();
 
 
   return (
@@ -148,6 +146,7 @@ const HomePage = () => {
             <Stepper />
           </div>
         </div>
+        <UserPrograms/>
       </div>
 
   );
