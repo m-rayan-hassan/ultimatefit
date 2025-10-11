@@ -17,8 +17,7 @@ const Navbar = () => {
           {/* LOGO */}
           <Link href="/" className="flex items-center gap-2">
             <div className="p-1 bg-primary/10 rounded">
-            <img src="/logo.png" alt="UltimateFit" className="w-8 h-8"/>
-              
+              <img src="/logo.png" alt="UltimateFit" className="w-8 h-8" />
             </div>
             <span className="text-xl font-bold font-mono">
               ultimate<span className="text-primary">fit</span>.ai
@@ -52,7 +51,7 @@ const Navbar = () => {
                   <UserIcon size={16} />
                   <span>Profile</span>
                 </Link>
-                
+
                 <UserButton />
               </>
             ) : (

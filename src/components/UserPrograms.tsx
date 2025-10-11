@@ -39,7 +39,7 @@ const UserPrograms = () => {
             </p>
 
             {/* STATS */}
-            <div className="flex items-center justify-center gap-16 mt-10 font-mono">
+            <div className="flex items-center justify-center gap-6 sm:gap-16 mt-10 font-mono">
               <div className="flex flex-col items-center">
                 <p className="text-3xl text-primary">500+</p>
                 <p className="text-sm text-muted-foreground uppercase tracking-wide mt-1">

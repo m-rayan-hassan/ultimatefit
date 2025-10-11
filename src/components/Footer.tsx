@@ -12,7 +12,7 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-2">
             <Link href="/" className="flex items-center gap-2">
               <div className="p-1 bg-primary/10 rounded">
-                <img src="/logo.png" alt="UltimateFit" className="w-8 h-8"/>
+                <img src="/logo.png" alt="UltimateFit" className="w-8 h-8" />
               </div>
               <span className="text-xl font-bold font-mono">
                 ultimate<span className="text-primary">fit</span>.ai
@@ -24,7 +24,7 @@ const Footer = () => {
           </div>
 
           {/* Links */}
-         
+
           {/* Status */}
           <div className="flex items-center gap-2 px-3 py-2 border border-border rounded-md bg-background/50">
             <div className="w-2 h-2 rounded-full bg-green-500"></div>

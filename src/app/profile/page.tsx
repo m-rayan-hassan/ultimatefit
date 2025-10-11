@@ -1,4 +1,7 @@
 "use client";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useUser } from "@clerk/nextjs";
 import CornerElements from "@/components/CornerElements";
 import NoFitnessPlan from "@/components/NoFitnessPlan";
 import ProfileHeader from "@/components/ProfileHeader";
@@ -10,41 +13,35 @@ import {
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useUser } from "@clerk/nextjs";
-import axios from "axios";
 import { AppleIcon, CalendarIcon, DumbbellIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
 
-
-  interface Meals {
+interface Meals {
+  name: string;
+  foods: string[];
+}
+interface Exercises {
+  day: string;
+  routines: {
     name: string;
-    foods: string[];
-  }
-  interface Exercises {
-    day: string;
-    routines: {
-      name: string;
-      sets?: number;
-      reps?: number;
-      youtube_link: string;
-      duration?: string;
-      description?: string;
-      steps: string[];
-      muscles_targeted: string[];
-      difficulty: string;
-      exercises?: string[];
-    }[];
-  }
-  interface WorkoutPlan {
+    sets?: number;
+    reps?: number;
+    youtube_link: string;
+    duration?: string;
+    description?: string;
+    steps: string[];
+    muscles_targeted: string[];
+    difficulty: string;
+  }[];
+}
+interface WorkoutPlan {
   schedule: string[];
   exercises: Exercises[];
 }
-
-  interface DietPlan {
+interface DietPlan {
   dailyCalories: number;
   meals: Meals[];
 }
-  interface Plan {
+interface Plan {
   _id: string;
   userId: string;
   name: string;
@@ -53,33 +50,42 @@ import React, { useEffect, useState } from "react";
   isActive: boolean;
 }
 
-
 const ProfilePage = () => {
   const { user } = useUser();
-
   const [allPlans, setAllPlans] = useState<Plan[]>([]);
   const [selectedPlanId, setSelectedPlanId] = useState<null | string>(null);
 
   useEffect(() => {
+    if (!user) return;
+
+    // 1️⃣ Load from localStorage
+    const savedPlans = localStorage.getItem("userPlans");
+    if (savedPlans) {
+      try {
+        const parsedPlans = JSON.parse(savedPlans);
+        setAllPlans(parsedPlans);
+      } catch (error) {
+        console.error("Error parsing local storage data:", error);
+      }
+    }
+
+    // 2️⃣ Fetch from API and update localStorage
     const fetchPlans = async () => {
       try {
-        if (!user) return;
-
-        // call your API
         const res = await axios.post("/api/get-user-plan", { userId: user.id });
-        setAllPlans(res.data.plans); // assuming API returns an array of plans
+        if (res.data?.plans) {
+          setAllPlans(res.data.plans);
+          localStorage.setItem("userPlans", JSON.stringify(res.data.plans));
+        }
       } catch (error) {
-        console.error("Error fetching user plans", error);
+        console.error("Error fetching user plans:", error);
       }
     };
 
     fetchPlans();
   }, [user]);
 
-  // Get the active plan
   const activePlan = allPlans.find((plan) => plan.isActive);
-
-  // Get the current plan (either selected or active)
   const currentPlan = selectedPlanId
     ? allPlans.find((plan) => plan._id === selectedPlanId)
     : activePlan;

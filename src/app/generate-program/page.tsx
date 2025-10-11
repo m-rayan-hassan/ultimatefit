@@ -58,7 +58,8 @@ const GenerateProgramPage = () => {
   // auto-scroll messages
   useEffect(() => {
     if (messageContainerRef.current) {
-      messageContainerRef.current.scrollTop = messageContainerRef.current.scrollHeight;
+      messageContainerRef.current.scrollTop =
+        messageContainerRef.current.scrollHeight;
     }
   }, [messages]);
 
@@ -102,9 +103,9 @@ const GenerateProgramPage = () => {
 
     const handleMessage = (message: VapiMessage) => {
       if (message.type === "transcript" && message.transcriptType === "final") {
-        const newMessage = { 
-          content: message.transcript || "", 
-          role: message.role || "unknown" 
+        const newMessage = {
+          content: message.transcript || "",
+          role: message.role || "unknown",
         };
         setMessages((prev) => [...prev, newMessage]);
       }
@@ -148,12 +149,18 @@ const GenerateProgramPage = () => {
           ? `${user.firstName} ${user.lastName || ""}`.trim()
           : "There";
 
-        await vapi.start(undefined, undefined, undefined, process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
-          variableValues: {
-            full_name: fullName,
-            user_id: user?.id,
-          },
-        });
+        await vapi.start(
+          undefined,
+          undefined,
+          undefined,
+          process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!,
+          {
+            variableValues: {
+              full_name: fullName,
+              user_id: user?.id,
+            },
+          }
+        );
       } catch (error) {
         console.log("Failed to start call", error);
         setConnecting(false);
@@ -171,7 +178,8 @@ const GenerateProgramPage = () => {
             <span className="text-primary uppercase">Fitness Program</span>
           </h1>
           <p className="text-muted-foreground mt-2">
-            Have a voice conversation with our AI assistant to create your personalized plan
+            Have a voice conversation with our AI assistant to create your
+            personalized plan
           </p>
         </div>
 
@@ -196,7 +204,9 @@ const GenerateProgramPage = () => {
                       }`}
                       style={{
                         animationDelay: `${i * 0.1}s`,
-                        height: isSpeaking ? `${Math.random() * 50 + 20}%` : "5%",
+                        height: isSpeaking
+                          ? `${Math.random() * 50 + 20}%`
+                          : "5%",
                       }}
                     />
                   ))}
@@ -221,8 +231,12 @@ const GenerateProgramPage = () => {
                 </div>
               </div>
 
-              <h2 className="text-xl font-bold text-foreground">UltimateFit AI</h2>
-              <p className="text-sm text-muted-foreground mt-1">Fitness & Diet Coach</p>
+              <h2 className="text-xl font-bold text-foreground">
+                UltimateFit AI
+              </h2>
+              <p className="text-sm text-muted-foreground mt-1">
+                Fitness & Diet Coach
+              </p>
 
               {/* SPEAKING INDICATOR */}
 
@@ -241,17 +255,19 @@ const GenerateProgramPage = () => {
                   {isSpeaking
                     ? "Speaking..."
                     : callActive
-                      ? "Listening..."
-                      : callEnded
-                        ? "Redirecting to profile..."
-                        : "Waiting..."}
+                    ? "Listening..."
+                    : callEnded
+                    ? "Redirecting to profile..."
+                    : "Waiting..."}
                 </span>
               </div>
             </div>
           </Card>
 
           {/* USER CARD */}
-          <Card className={`bg-card/90 backdrop-blur-sm border overflow-hidden relative`}>
+          <Card
+            className={`bg-card/90 backdrop-blur-sm border overflow-hidden relative`}
+          >
             <div className="aspect-video flex flex-col items-center justify-center p-6 relative">
               {/* User Image */}
               <div className="relative size-32 mb-4">
@@ -267,11 +283,15 @@ const GenerateProgramPage = () => {
 
               <h2 className="text-xl font-bold text-foreground">You</h2>
               <p className="text-sm text-muted-foreground mt-1">
-                {user ? (user.firstName + " " + (user.lastName || "")).trim() : "Guest"}
+                {user
+                  ? (user.firstName + " " + (user.lastName || "")).trim()
+                  : "Guest"}
               </p>
 
               {/* User Ready Text */}
-              <div className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border`}>
+              <div
+                className={`mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-card border`}
+              >
                 <div className={`w-2 h-2 rounded-full bg-muted`} />
                 <span className="text-xs text-muted-foreground">Ready</span>
               </div>
@@ -297,9 +317,12 @@ const GenerateProgramPage = () => {
 
               {callEnded && (
                 <div className="message-item animate-fadeIn">
-                  <div className="font-semibold text-xs text-primary mb-1">System:</div>
+                  <div className="font-semibold text-xs text-primary mb-1">
+                    System:
+                  </div>
                   <p className="text-foreground">
-                    Your fitness program has been created! Redirecting to your profile...
+                    Your fitness program has been created! Redirecting to your
+                    profile...
                   </p>
                 </div>
               )}
@@ -314,8 +337,8 @@ const GenerateProgramPage = () => {
               callActive
                 ? "bg-destructive hover:bg-destructive/90"
                 : callEnded
-                  ? "bg-green-600 hover:bg-green-700"
-                  : "bg-primary hover:bg-primary/90"
+                ? "bg-green-600 hover:bg-green-700"
+                : "bg-primary hover:bg-primary/90"
             } text-white relative`}
             onClick={toggleCall}
             disabled={connecting || callEnded}
@@ -328,10 +351,10 @@ const GenerateProgramPage = () => {
               {callActive
                 ? "End Call"
                 : connecting
-                  ? "Connecting..."
-                  : callEnded
-                    ? "View Profile"
-                    : "Start Call"}
+                ? "Connecting..."
+                : callEnded
+                ? "View Profile"
+                : "Start Call"}
             </span>
           </Button>
         </div>

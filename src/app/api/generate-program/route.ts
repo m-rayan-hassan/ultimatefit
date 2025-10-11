@@ -12,11 +12,13 @@ export async function POST(request: NextRequest) {
     age,
     weight,
     height,
+    gender,
     injuries,
     fitness_goal,
     workout_days,
     dietary_restrictions,
     fitness_level,
+    equipment,
     food_preferences,
     user_id,
     full_name,
@@ -25,11 +27,13 @@ export async function POST(request: NextRequest) {
   console.log("Age:", age);
   console.log("Weight:", weight);
   console.log("Height:", height);
+  console.log("Gender:", gender);
   console.log("Injuries:", injuries);
   console.log("Fitness Goal:", fitness_goal);
   console.log("Workout Days:", workout_days);
   console.log("Dietary Restrictions:", dietary_restrictions);
   console.log("Fitness Level:", fitness_level);
+  console.log("Equipment:", equipment);
   console.log("Food Preferences:", food_preferences);
   console.log("User ID:", user_id);
   console.log("Full Name:", full_name);
@@ -38,10 +42,12 @@ export async function POST(request: NextRequest) {
         Age: ${age}
         Height: ${height}
         Weight: ${weight}
+        Gender: ${gender}
         Injuries or limitations: ${injuries}
         Available days for workout: ${workout_days}
         Fitness goal: ${fitness_goal}
         Fitness level: ${fitness_level}
+        Workout Equipment: ${equipment}
         
         As a professional coach:
         - Consider muscle group splits to avoid overtraining the same muscles on consecutive days
@@ -126,6 +132,7 @@ export async function POST(request: NextRequest) {
         Age: ${age}
         Height: ${height}
         Weight: ${weight}
+        Gender: ${gender}
         Fitness goal: ${fitness_goal}
         Dietary restrictions: ${dietary_restrictions}
         Food Preferences: ${food_preferences}
@@ -261,7 +268,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.log("Error Creating plan");
+    console.log("Error Creating plan", error);
     return NextResponse.json(
       { message: "Error creating plan" },
       { status: 500 }

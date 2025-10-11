@@ -72,9 +72,11 @@ const EquipmentSelector = ({
       </Button>
 
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("barbell") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("barbell")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("barbell")}
       >
@@ -87,9 +89,11 @@ const EquipmentSelector = ({
       </Button>
 
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("pull-up-bar") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("pull-up-bar")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("pull-up-bar")}
       >
@@ -102,9 +106,11 @@ const EquipmentSelector = ({
       </Button>
 
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("bench") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("bench")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("bench")}
       >
@@ -117,9 +123,11 @@ const EquipmentSelector = ({
       </Button>
 
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("plate") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("plate")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("plate")}
       >
@@ -132,9 +140,11 @@ const EquipmentSelector = ({
       </Button>
 
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("kettlebell") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("kettlebell")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("kettlebell")}
       >
@@ -146,9 +156,11 @@ const EquipmentSelector = ({
         <p className="text-lg font-medium">Kettlebell</p>
       </Button>
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("complete-gym") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("complete-gym")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("complete-gym")}
       >
@@ -156,9 +168,11 @@ const EquipmentSelector = ({
         <p className="text-lg font-medium">Complete GYM</p>
       </Button>
       <Button
-        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${isSelected("cable-machine") ?
-      "border-5 border-teal-300 bg-primary/10 text-primary" : ""
-      }`}
+        className={`border-primary/50 hover:text-white hover:bg-primary/10 flex flex-col items-center justify-center h-auto ${
+          isSelected("cable-machine")
+            ? "border-5 border-teal-300 bg-primary/10 text-primary"
+            : ""
+        }`}
         variant={"outline"}
         onClick={() => handleClick("cable-machine")}
       >
