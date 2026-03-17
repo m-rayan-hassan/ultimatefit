@@ -53,8 +53,11 @@ const Exercises: React.FC<Props> = ({ selectedMuscles, selectedEquipment }) => {
   <div className="absolute inset-0 bg-cyber-grid bg-[length:40px_40px] opacity-30 pointer-events-none"></div>
   
   {isLoading ? (
-    <div className="flex justify-center items-center w-full h-screen">
-      <p className="text-2xl">Loading Your Exercises...</p>
+    <div className="flex flex-col justify-center items-center w-full h-[400px] z-10 text-center space-y-6">
+      <div className="w-12 h-12 rounded-full border-4 border-primary/20 border-t-primary animate-spin"></div>
+      <p className="text-lg text-primary animate-pulse font-medium tracking-wide">
+        Generating your workout plan...
+      </p>
     </div>
   ) : (
     <div className="overflow-y-auto pr-2 relative z-10 cyber-scrollbar">

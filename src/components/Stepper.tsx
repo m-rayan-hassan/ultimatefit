@@ -73,28 +73,41 @@ const Stepper = () => {
 
   return (
     <>
-      <div className="relative flex items-center justify-between w-full px-8 py-2 border-b">
+      <div className="flex items-center w-full px-12 py-8 border-b">
         {steps.map((step, index) => {
+          const isCompleted = currentStep > index + 1 || currentStep === steps.length;
+          const isCurrent = currentStep === index + 1 && currentStep !== steps.length;
+          
           return (
-            <div key={step.name} className="flex flex-col items-center">
-              <div
-                className={`
-    w-7 h-7 rounded-full mb-1.5 flex justify-center font-bold border-3 p-4 items-center
-    ${
-      currentStep === steps.length || currentStep > index + 1
-        ? "bg-green-600 text-white"
-        : currentStep === index + 1
-        ? "bg-teal-500 text-white"
-        : "border-primary text-primary"
-    }
-  `}
-              >
-                {currentStep > index + 1 || currentStep === steps.length
-                  ? "✓"
-                  : index + 1}
+            <React.Fragment key={step.name}>
+              <div className="flex flex-col items-center relative z-10">
+                <div
+                  className={`
+                    w-10 h-10 rounded-full flex justify-center font-bold items-center transition-all duration-300 bg-background
+                    ${
+                      isCompleted
+                        ? "bg-primary text-primary-foreground border-2 border-primary shadow-[0_0_10px_rgba(0,245,212,0.5)]"
+                        : isCurrent
+                        ? "text-primary shadow-[0_0_15px_rgba(0,245,212,0.4)] border-2 border-primary scale-110"
+                        : "border-2 border-border text-muted-foreground"
+                    }
+                  `}
+                >
+                  {isCompleted ? "✓" : index + 1}
+                </div>
+                <div className={`absolute top-12 whitespace-nowrap text-sm font-semibold transition-colors duration-300 ${isCurrent ? 'text-primary' : isCompleted ? 'text-primary' : 'text-muted-foreground'}`}>
+                  {step.name}
+                </div>
               </div>
-              <div className="font-semibold">{step.name}</div>
-            </div>
+              {index < steps.length - 1 && (
+                 <div className="flex-1 h-1 bg-border mx-4 relative overflow-hidden rounded-full">
+                    <div 
+                      className="absolute top-0 left-0 h-full bg-primary transition-all duration-500 ease-in-out" 
+                      style={{ width: currentStep > index + 1 ? '100%' : '0%' }}
+                    ></div>
+                 </div>
+              )}
+            </React.Fragment>
           );
         })}
       </div>
