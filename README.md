@@ -15,9 +15,13 @@
 
 </div>
 
+## 📝 Project Description
+
+UltimateFit is an AI-powered fitness web app that generates personalized workout routines and diet plans, featuring an interactive muscle selector and an AI voice coach. It’s built with Next.js (App Router), React, and TypeScript, styled with Tailwind CSS, uses MongoDB (with Mongoose) for data storage, Clerk for authentication, and integrates OpenAI/Gemini plus Vapi for AI and voice features.
+
 ## 🏋️‍♂️ About UltimateFit
 
-UltimateFit is an innovative AI-powered fitness application that revolutionizes personal training by providing customized workout routines and diet plans through voice interaction with an intelligent AI coach. The platform combines cutting-edge AI technology with comprehensive fitness expertise to deliver personalized fitness solutions tailored to individual goals, equipment availability, and fitness levels.
+UltimateFit is an innovative AI-powered fitness application that revolutionizes personal training by providing customized workout routines and diet plans through voice interaction with an intellig[...]
 
 ### ✨ Key Features
 
