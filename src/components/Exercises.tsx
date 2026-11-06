@@ -37,7 +37,8 @@ const Exercises: React.FC<Props> = ({ selectedMuscles, selectedEquipment }) => {
         console.log(response.data.exercises);
         const rawResponse = response.data.exercises
           .replace(/```json|```/g, "")
-          .trim();
+          .trim()
+          .replace(/\u00A0/g, " ");
         setGeneratedExercises(JSON.parse(rawResponse));
       } catch (error) {
         console.error("Error fetching exercises", error);
